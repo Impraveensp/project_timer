@@ -7,7 +7,7 @@ jobs:
       name: node/default
     steps:
       - checkout
-      - run: echo "export COMMIT_MESSAGE=\"$(git log --format=%B -n 1 $CIRCLE_SHA1)\"" >> ~/.bashrc
+      - run: export COMMIT_MESSAGE=\"$(git log --format=%B -n 1 $CIRCLE_SHA1)\" >> ~/.bashrc
       - run: echo $COMMIT_MESSAGE
 workflows:
     build-and-test:
