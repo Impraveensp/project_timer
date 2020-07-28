@@ -8,6 +8,15 @@ commands:
       - run: 
           name: "Setup custom environment variables"
           command: echo 'export MY_ENV_VAR="$(git log --format=%B -n 1 $CIRCLE_SHA1)"' >> $BASH_ENV
+  notify-success:
+    description: "Notify google chat on success"
+    steps:
+      - run:
+          name: Notify google chat on success
+          command: >
+            curl --header "Content-Type: application/json"
+            --request POST
+            --data "{\"cards\":[{\"header\":\"${CIRCLE_JOB} success\"},\"sections\":[{\"widgets\":[{\"keyValue\":{\"content\":\"${MY_ENV_VAR} Test\",\"contentMultiline\":\"true\"}}]}]]} https://chat.googleapis.com/v1/spaces/2mGr9gAAAAE/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=MFAkVmrR4yGc4MfLPvVQRW5ZYT7yTr5pjwopaIs7sZE%3D
 jobs:
   build-and-test:
     executor:
@@ -28,6 +37,10 @@ jobs:
           name: "What was my custom environment variable?"
           command: |
             echo ${MY_ENV_VAR}
+      - run:
+          name: Notify
+          when: on_success
+          command: notify-success
 workflows:
     build-and-test:
       jobs:
