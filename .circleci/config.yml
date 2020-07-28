@@ -37,7 +37,6 @@ jobs:
       name: node/default            
     steps:
       - checkout
-      - create-env-vars
       - run: 
           name: "What was my custom environment variable?"
           command: |
@@ -48,7 +47,6 @@ jobs:
       name: node/default            
     steps:
       - checkout
-      - create-env-vars
       - run: 
           name: "What was my custom environment variable?"
           command: notify-success
