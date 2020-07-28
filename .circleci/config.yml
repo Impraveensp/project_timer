@@ -22,6 +22,7 @@ jobs:
     executor:
       name: node/default            
     steps:
+      - create-env-vars
       - run: 
           name: "What was my custom environment variable?"
           command: |
