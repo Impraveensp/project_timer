@@ -36,6 +36,7 @@ jobs:
           name: "What was my custom environment variable?"
           command: |
             echo ${MY_ENV_VAR}
+      - notify-success
 workflows:
     build-and-test:
       jobs:
