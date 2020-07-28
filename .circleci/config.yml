@@ -13,13 +13,13 @@ commands:
     steps:
       - create-env-vars
       - run:
-          name: Notify google chat on success
-          when: on_success
-          command: echo Success $MY_ENV_VAR
-      - run:
           name: Notify google chat on fail
           when: on_fail
           command: echo Failed $MY_ENV_VAR
+      - run:
+          name: Notify google chat on success
+          when: on_success
+          command: echo Success $MY_ENV_VAR
 jobs:
   build-and-test:
     executor:
