@@ -1,16 +1,20 @@
 version: 2.1
 orbs:
   node: circleci/node@1.1.6
+commands:
+  create-env-vars:
+    description: "Create en vars"
+    steps:
+      - run: 
+          name: "Setup custom environment variables"
+          command: echo 'export MY_ENV_VAR="$(git log --format=%B -n 1 $CIRCLE_SHA1)"' >> $BASH_ENV
 jobs:
   build-and-test:
     executor:
       name: node/default
     steps:
       - checkout
-      - run: 
-          name: "Setup custom environment variables"
-          command: |
-            echo 'export MY_ENV_VAR="$(git log --format=%B -n 1 $CIRCLE_SHA1)"' >> $BASH_ENV
+      - create-env-vars
   second-job:
     executor:
       name: node/default            
