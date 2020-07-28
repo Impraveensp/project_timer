@@ -24,6 +24,7 @@ jobs:
     executor:
       name: node/default
     steps:
+      - create-env-vars
       - checkout
       - run: 
           name: "What was my custom environment variable?"
@@ -35,6 +36,7 @@ jobs:
     steps:
       - checkout:
           path: ~/project
+      - create-env-vars
       - notify-google-chat
       - run: 
           name: "What was my custom environment variable?"
