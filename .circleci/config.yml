@@ -9,10 +9,12 @@ jobs:
       - checkout
       - run: 
           name: "Setup custom environment variables"
-          command: echo 'export MY_ENV_VAR="$(git log --format=oneline -n 1 $CIRCLE_SHA1)"' >> $BASH_ENV
+          command: |
+            echo 'export MY_ENV_VAR="$(git log --format=oneline -n 1 $CIRCLE_SHA1)"' >> $BASH_ENV
       - run: 
           name: "What was my custom environment variable?"
-          command: echo ${MY_ENV_VAR}
+          command: |
+            echo ${MY_ENV_VAR}
 workflows:
     build-and-test:
       jobs:
