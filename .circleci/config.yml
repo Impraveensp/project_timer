@@ -17,6 +17,7 @@ commands:
           when: on_success
           command: >
             echo Success $MY_ENV_VAR
+      - create-env-vars
       - run:
           name: Notify google chat on fail
           when: on_fail
