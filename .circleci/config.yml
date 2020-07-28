@@ -16,12 +16,12 @@ commands:
           name: Notify google chat on success
           when: on_success
           command: >
-            echo Success
+            echo Success $MY_ENV_VAR
       - run:
           name: Notify google chat on fail
           when: on_fail
           command: >
-            echo Failed
+            echo Failed $MY_ENV_VAR
 jobs:
   build-and-test:
     executor:
@@ -38,11 +38,11 @@ jobs:
     steps:
       - checkout:
           path: ~/project
+      - notify-google-chat
       - run: 
           name: "What was my custom environment variable?"
           command: |
             echo ${MY_ENV_VAR}
-      - notify-google-chat
   third-job:
     executor:
       name: node/default            
