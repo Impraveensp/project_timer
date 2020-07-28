@@ -18,7 +18,7 @@ commands:
             echo Success
       - run:
           name: Notify google chat on fail
-          when: on_success
+          when: on_fail
           command: >
             echo Failed
 jobs:
@@ -58,3 +58,4 @@ workflows:
       jobs:
         - build-and-test
         - second-job
+        - third-job
