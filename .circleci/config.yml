@@ -45,10 +45,10 @@ jobs:
       name: node/default            
     steps:
       - checkout
+      - create-env-vars
       - run: 
           name: "What was my custom environment variable?"
           command: notify-success
-      - create-env-vars
       - notify-google-chat
 workflows:
     build-and-test:
