@@ -11,7 +11,6 @@ commands:
   notify-google-chat:
     description: "Notify google chat"
     steps:
-      - create-env-vars
       - run:
           name: Notify google chat on fail
           when: on_fail
@@ -49,6 +48,7 @@ jobs:
       - run: 
           name: "What was my custom environment variable?"
           command: notify-success
+      - create-env-vars
       - notify-google-chat
 workflows:
     build-and-test:
