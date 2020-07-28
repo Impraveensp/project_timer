@@ -15,6 +15,9 @@ jobs:
     steps:
       - checkout
       - create-env-vars
+      - run: 
+          name: "What was my custom environment variable?"
+          command: echo ${MY_ENV_VAR}
   second-job:
     executor:
       name: node/default            
