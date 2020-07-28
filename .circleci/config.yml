@@ -15,8 +15,7 @@ commands:
           name: Notify google chat on success
           command: >
             curl --header "Content-Type: application/json"
-            --request POST
-            --data "{\"cards\":[{\"header\":\"${CIRCLE_JOB} success.\"},\"sections\":[{\"widgets\":[{\"keyValue\":{\"content\":\"${MY_ENV_VAR} Test\",\"contentMultiline\":\"true\"}}]}]]}" "https://chat.googleapis.com/v1/spaces/2mGr9gAAAAE/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=MFAkVmrR4yGc4MfLPvVQRW5ZYT7yTr5pjwopaIs7sZE%3D"
+            --request POST --data "{\"cards\":[{\"header\":{\"title\":\"${CIRCLE_JOB} success\"},\"sections\":[{\"widgets\":[{\"keyValue\":{\"content\":\"${MY_ENV_VAR} Test\",\"contentMultiline\":\"true\"}}]}]}]}" "https://chat.googleapis.com/v1/spaces/2mGr9gAAAAE/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=MFAkVmrR4yGc4MfLPvVQRW5ZYT7yTr5pjwopaIs7sZE%3D"
 jobs:
   build-and-test:
     executor:
