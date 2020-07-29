@@ -22,7 +22,7 @@ commands:
       - run:
           name: Notify google chat on success
           when: on_success
-          command: |
+          command: >
             if [ << parameters.notify_success >> == true ]; then
               echo Success $MY_ENV_VAR
             fi
