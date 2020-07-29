@@ -24,7 +24,8 @@ commands:
           when: on_success
           command: >
             if [ << parameters.notify_success >> == true ]; then
-              echo Success $MY_ENV_VAR
+              echo 
+              Success $MY_ENV_VAR
             fi
 jobs:
   build-and-test:
