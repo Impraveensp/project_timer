@@ -26,7 +26,7 @@ commands:
             if [ << parameters.notify_success >> == true ]; then
               curl --header "Content-Type: application/json" 
               --request POST
-              --data "{\"text\":\"Hellooo\"}"
+              --data "{\"text\":\"Hellooo\"}" 
               "https://chat.googleapis.com/v1/spaces/2mGr9gAAAAE/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=MFAkVmrR4yGc4MfLPvVQRW5ZYT7yTr5pjwopaIs7sZE%3D"
             fi
 jobs:
