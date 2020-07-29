@@ -10,6 +10,10 @@ commands:
           command: echo 'export MY_ENV_VAR="$(git log --format=%B -n 1 $CIRCLE_SHA1)"' >> $BASH_ENV
   notify-google-chat:
     description: "Notify google chat"
+    parameters:
+      notify_success:
+        default: false
+        type: boolean
     steps:
       - run:
           name: Notify google chat on fail
@@ -18,7 +22,10 @@ commands:
       - run:
           name: Notify google chat on success
           when: on_success
-          command: echo Success $MY_ENV_VAR
+          command: |
+            if [ << parameters.notify_success >> == true ]; then
+              echo Success $MY_ENV_VAR
+            fi
 jobs:
   build-and-test:
     executor:
@@ -29,7 +36,8 @@ jobs:
       - run: 
           name: "What was my custom environment variable?"
           command: echo ${MY_ENV_VAR}
-      - notify-google-chat
+      - notify-google-chat:
+          notify_success: true
   second-job:
     executor:
       name: node/default            
