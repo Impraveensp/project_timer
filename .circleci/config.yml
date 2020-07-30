@@ -16,6 +16,10 @@ commands:
         type: boolean
     steps:
       - run:
+          name: Set GIT_COMMIT_MESSAGE
+          when: always
+          command: echo 'export MY_ENV_VAR="$(git log --format=%B -n 1 $CIRCLE_SHA1)"' >> $BASH_ENV
+      - run:
           name: Notify google chat on fail
           when: on_fail
           command: echo Failed $MY_ENV_VAR
@@ -31,7 +35,6 @@ jobs:
     executor:
       name: node/default
     steps:
-      - create-env-vars
       - checkout
       - run: 
           name: "What was my custom environment variable?"
@@ -44,7 +47,6 @@ jobs:
     steps:
       - checkout:
           path: ~/project
-      - create-env-vars
       - notify-google-chat
       - run: 
           name: "What was my custom environment variable?"
@@ -55,7 +57,6 @@ jobs:
       name: node/default            
     steps:
       - checkout
-      - create-env-vars
       - run: 
           name: "What was my custom environment variable?"
           command: notify-success
