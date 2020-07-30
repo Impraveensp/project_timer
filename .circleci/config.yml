@@ -28,7 +28,7 @@ commands:
           when: on_success
           command: >
             if [ << parameters.notify_success >> == true ]; then
-              echo Success $MY_ENV_VAR
+              curl --header "Content-Type: application/json" --request POST --data "{\"text\":\"Hellooo if\"}" $CHAT_URL
             fi
 jobs:
   build-and-test:
