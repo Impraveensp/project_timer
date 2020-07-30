@@ -28,7 +28,7 @@ commands:
           when: on_success
           command: >
             if [ << parameters.notify_success >> == true ]; then
-              curl --header "Content-Type: application/json" --request POST --data "{\"text\":\"Hellooo if\"}" https://chat.googleapis.com/v1/spaces/2mGr9gAAAAE/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=MFAkVmrR4yGc4MfLPvVQRW5ZYT7yTr5pjwopaIs7sZE%3D
+              echo Success $MY_ENV_VAR
             fi
 jobs:
   build-and-test:
