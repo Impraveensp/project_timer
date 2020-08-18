@@ -76,8 +76,6 @@ jobs:
       name: node/default
     steps:
       - repo-cache
-      - dependency-cache:
-          test_var: component
       - run: 
           name: "What was my custom environment variable?"
           command: echo ${MY_ENV_VAR}
@@ -87,7 +85,7 @@ jobs:
     executor:
       name: node/default            
     steps:
-      - checkout
+      - repo-cache
       - dependency-cache:
           test_var: component
       - test-cache

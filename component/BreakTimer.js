@@ -24,7 +24,7 @@ export default class BreakTimer extends React.Component{
         }
         else{
             this.setState({
-                timerValue:new Date(this.state.timerValue.setSeconds(this.state.timerValue.getSeconds()-1))
+                timerValue:new Date(this.state.timerValue.setSeconds(this.state.timerValue.getSeconds()))
             })
         }
     }
