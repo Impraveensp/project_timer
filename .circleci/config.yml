@@ -52,7 +52,7 @@ commands:
           working_directory: .
           command: npm install
       - save_cache:
-          key: source-cache-{{ checksum "component/BreakTimer.js" }}
+          key: source-cache-{{ checksum "<< parameters.test_var >>/BreakTimer.js" }}
           paths:
             - ./node_modules
   test-cache:
