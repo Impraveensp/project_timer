@@ -33,7 +33,8 @@ commands:
       - restore_cache:
           keys:
             - source-v1-{{ .Branch }}-{{ .Revision }}
-      - checkout
+      - checkout:
+          path: ~/repo
       - save_cache:
           key: source-v1-{{ .Branch }}-{{ .Revision }}
           paths:
@@ -71,6 +72,7 @@ jobs:
   build-and-test:
     executor:
       name: node/default
+    working_directory: ~/repo
     steps:
       - repo-cache
       - dependency-cache
