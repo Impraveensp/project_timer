@@ -40,10 +40,13 @@ commands:
             - ".git"
   dependency-cache:
     description: "Caching dependency"
+    parameters:
+      test_var:
+        type: string
     steps:
       - restore_cache:
           keys:
-            - source-cache-{{ checksum "component/BreakTimer.js" }}
+            - source-cache-{{ checksum "<< parameters.test_var >>/BreakTimer.js" }}
       - run:
           name: "Install Dependency"
           working_directory: .
@@ -73,7 +76,8 @@ jobs:
       name: node/default
     steps:
       - repo-cache
-      - dependency-cache
+      - dependency-cache:
+          test_var: component
       - run: 
           name: "What was my custom environment variable?"
           command: echo ${MY_ENV_VAR}
@@ -84,7 +88,8 @@ jobs:
       name: node/default            
     steps:
       - checkout
-      - dependency-cache
+      - dependency-cache:
+          test_var: component
       - test-cache
       - notify-google-chat
       - run: 
