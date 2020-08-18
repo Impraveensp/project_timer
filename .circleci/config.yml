@@ -26,10 +26,8 @@ commands:
       - run:
           name: Notify google chat on success
           when: on_success
-          command: >
-            if [ << parameters.notify_success >> == true ]; then
-              curl --header "Content-Type: application/json" --request POST --data "{\"text\":\"Hellooo if\"}" $CHAT_URL
-            fi
+          command: echo "Success"
+
 jobs:
   build-and-test:
     executor:
