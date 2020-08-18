@@ -59,7 +59,8 @@ jobs:
       - save_cache:
           key: source-v1-{{ .Branch }}-{{ .Revision }}
           paths:
-            - ".git"      - notify-google-chat
+            - ".git"
+      - notify-google-chat
       - run: 
           name: "What was my custom environment variable?"
           command: |
