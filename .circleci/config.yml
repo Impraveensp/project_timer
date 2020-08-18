@@ -33,11 +33,14 @@ jobs:
     executor:
       name: node/default
     steps:
+      - restore_cache:
+          keys:
+            - source-v1-{{ .Branch }}-{{ .Revision }}
       - checkout
       - save_cache:
           key: source-v1-{{ .Branch }}-{{ .Revision }}
           paths:
-            - ".git"
+            - .
       - run: 
           name: "What was my custom environment variable?"
           command: echo ${MY_ENV_VAR}
@@ -50,6 +53,11 @@ jobs:
       - restore_cache:
           keys:
             - source-v1-{{ .Branch }}-{{ .Revision }}
+      - checkout
+      - save_cache:
+          key: source-v1-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - .
       - notify-google-chat
       - run: 
           name: "What was my custom environment variable?"
@@ -62,7 +70,12 @@ jobs:
       - restore_cache:
           keys:
             - source-v1-{{ .Branch }}-{{ .Revision }}
-      - run: 
+      - checkout
+      - save_cache:
+          key: source-v1-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - .
+      - run:
           name: "What was my custom environment variable?"
           command: notify-success
       - notify-google-chat
