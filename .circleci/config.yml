@@ -105,6 +105,4 @@ workflows:
         - second-job:
             requires:
               - build-and-test
-        - third-job:
-            requires:
-              - build-and-test
+        - third-job
