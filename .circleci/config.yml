@@ -41,6 +41,17 @@ jobs:
           key: source-v1-{{ .Branch }}-{{ .Revision }}
           paths:
             - ".git"
+      - restore_cache:
+          keys:
+            - source-cache-{{ .Branch }}-{{ .Revision }}
+      - run:
+          name: "Install Dependency"
+          working_directory: .
+          command: npm install
+      - save_cache:
+          key: source-cache-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - ./node_modules
       - run: 
           name: "What was my custom environment variable?"
           command: echo ${MY_ENV_VAR}
@@ -51,6 +62,17 @@ jobs:
       name: node/default            
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            - source-cache-{{ .Branch }}-{{ .Revision }}
+      - run:
+          name: "Install Dependency"
+          working_directory: .
+          command: npm install
+      - save_cache:
+          key: source-cache-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - ./node_modules
       - notify-google-chat
       - run: 
           name: "What was my custom environment variable?"
@@ -68,6 +90,10 @@ jobs:
           key: source-v1-{{ .Branch }}-{{ .Revision }}
           paths:
             - ".git"
+      - run:
+          name: "Install Dependency"
+          working_directory: .
+          command: npm install
       - run:
           name: "What was my custom environment variable?"
           command: notify-success
