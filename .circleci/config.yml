@@ -52,6 +52,20 @@ commands:
           key: source-cache-{{ .Branch }}-{{ .Revision }}
           paths:
             - ./node_modules
+  test-cache:
+    description: "Test"
+    steps:
+      - restore_cache:
+          keys:
+            - test-{{ .Branch }}-{{ .Revision }}
+      - run:
+          name: "Install Dependency"
+          working_directory: ./assets
+          command: echo hi
+      - save_cache:
+          key: source-cache-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - ./node_modules
 
 jobs:
   build-and-test:
@@ -71,6 +85,7 @@ jobs:
     steps:
       - checkout
       - dependency-cache
+      - test-cache
       - notify-google-chat
       - run: 
           name: "What was my custom environment variable?"
