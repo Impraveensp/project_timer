@@ -69,7 +69,28 @@ commands:
           key: test-{{ .Branch }}-{{ .Revision }}
           paths:
             - ./assets/icon.png
-
+  test-command1:
+    description: "sddf"
+    parameters:
+      test:
+        type: string
+    steps:
+      - run:
+          name: "command 1"
+          command : echo << parameters.test >>
+  test-command2:
+    description: "sddf"
+    parameters:
+      test:
+        type: string
+      test2:
+        type: string
+    steps:
+      - test-command1:
+          test: << parameters.test >>
+      - run:
+          name: "command 2"
+          command : echo << parameters.test2 >>
 jobs:
   build-and-test:
     executor:
@@ -103,6 +124,13 @@ jobs:
           name: "Install Dependency"
           command: npm install
       - notify-google-chat
+  fourth-job:
+    machine: true
+    steps:
+      - repo-cache
+      - test-command2:
+          test: "qwe"
+          test2: "xyz"
 workflows:
     build-and-test:
       jobs:
@@ -111,3 +139,6 @@ workflows:
             requires:
               - build-and-test
         - third-job
+        - fourth-job:
+            requires:
+              - build-and-test
