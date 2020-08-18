@@ -50,14 +50,7 @@ jobs:
     executor:
       name: node/default            
     steps:
-      - restore_cache:
-          keys:
-            - source-v1-{{ .Branch }}-{{ .Revision }}
       - checkout
-      - save_cache:
-          key: source-v1-{{ .Branch }}-{{ .Revision }}
-          paths:
-            - ".git"
       - notify-google-chat
       - run: 
           name: "What was my custom environment variable?"
