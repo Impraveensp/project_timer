@@ -65,7 +65,7 @@ commands:
       - save_cache:
           key: test-{{ .Branch }}-{{ .Revision }}
           paths:
-            - ./node_modules
+            - ./icon.png
 
 jobs:
   build-and-test:
