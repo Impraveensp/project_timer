@@ -40,7 +40,7 @@ jobs:
       - save_cache:
           key: source-v1-{{ .Branch }}-{{ .Revision }}
           paths:
-            - .
+            - ".git"
       - run: 
           name: "What was my custom environment variable?"
           command: echo ${MY_ENV_VAR}
@@ -57,7 +57,7 @@ jobs:
       - save_cache:
           key: source-v1-{{ .Branch }}-{{ .Revision }}
           paths:
-            - .
+            - ".git"
       - notify-google-chat
       - run: 
           name: "What was my custom environment variable?"
@@ -74,7 +74,7 @@ jobs:
       - save_cache:
           key: source-v1-{{ .Branch }}-{{ .Revision }}
           paths:
-            - .
+            - ".git"
       - run:
           name: "What was my custom environment variable?"
           command: notify-success
