@@ -27,11 +27,8 @@ commands:
           name: Notify google chat on success
           when: on_success
           command: echo "Success"
-
-jobs:
-  build-and-test:
-    executor:
-      name: node/default
+  repo-cache:
+    description: "Caching repository"
     steps:
       - restore_cache:
           keys:
@@ -41,6 +38,9 @@ jobs:
           key: source-v1-{{ .Branch }}-{{ .Revision }}
           paths:
             - ".git"
+  dependency-cache:
+    description: "Caching dependency"
+    steps:
       - restore_cache:
           keys:
             - source-cache-{{ .Branch }}-{{ .Revision }}
@@ -52,6 +52,14 @@ jobs:
           key: source-cache-{{ .Branch }}-{{ .Revision }}
           paths:
             - ./node_modules
+
+jobs:
+  build-and-test:
+    executor:
+      name: node/default
+    steps:
+      - repo-cache
+      - dependency-cache
       - run: 
           name: "What was my custom environment variable?"
           command: echo ${MY_ENV_VAR}
@@ -62,17 +70,7 @@ jobs:
       name: node/default            
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - source-cache-{{ .Branch }}-{{ .Revision }}
-      - run:
-          name: "Install Dependency"
-          working_directory: .
-          command: npm install
-      - save_cache:
-          key: source-cache-{{ .Branch }}-{{ .Revision }}
-          paths:
-            - ./node_modules
+      - dependency-cache
       - notify-google-chat
       - run: 
           name: "What was my custom environment variable?"
@@ -82,14 +80,7 @@ jobs:
     executor:
       name: node/default            
     steps:
-      - restore_cache:
-          keys:
-            - source-v1-{{ .Branch }}-{{ .Revision }}
-      - checkout
-      - save_cache:
-          key: source-v1-{{ .Branch }}-{{ .Revision }}
-          paths:
-            - ".git"
+      - repo-cache
       - run:
           name: "Install Dependency"
           working_directory: .
