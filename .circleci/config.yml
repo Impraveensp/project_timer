@@ -128,6 +128,8 @@ jobs:
     machine: true
     steps:
       - repo-cache
+      - dependency-cache:
+          test_var: component
       - test-command2:
           test: "qwe"
           test2: "xyz"
