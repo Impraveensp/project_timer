@@ -65,7 +65,7 @@ commands:
       - save_cache:
           key: test-{{ .Branch }}-{{ .Revision }}
           paths:
-            - ./icon.png
+            - ./assets/icon.png
 
 jobs:
   build-and-test:
@@ -92,9 +92,8 @@ jobs:
           command: |
             echo ${MY_ENV_VAR}
   third-job:
-    working_directory: ./assets
     executor:
-      name: node/default            
+      name: node/default
     steps:
       - repo-cache
       - run:
