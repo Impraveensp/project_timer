@@ -92,13 +92,13 @@ jobs:
           command: |
             echo ${MY_ENV_VAR}
   third-job:
+    working_directory: ./assets
     executor:
       name: node/default            
     steps:
       - repo-cache
       - run:
           name: "Install Dependency"
-          working_directory: .
           command: npm install
       - run:
           name: "What was my custom environment variable?"
