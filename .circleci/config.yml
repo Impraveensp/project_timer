@@ -59,9 +59,9 @@ commands:
           keys:
             - test-{{ .Branch }}-{{ .Revision }}
       - run:
-          name: "Install Dependency"
+          name: "Test"
           working_directory: ./assets
-          command: echo hi
+          command: ls
       - save_cache:
           key: test-{{ .Branch }}-{{ .Revision }}
           paths:
