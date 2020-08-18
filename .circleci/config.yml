@@ -63,7 +63,7 @@ commands:
           working_directory: ./assets
           command: echo hi
       - save_cache:
-          key: source-cache-{{ .Branch }}-{{ .Revision }}
+          key: test-{{ .Branch }}-{{ .Revision }}
           paths:
             - ./node_modules
 
