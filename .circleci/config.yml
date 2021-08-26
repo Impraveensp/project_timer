@@ -154,6 +154,7 @@ jobs:
       - run:
           name: "trigger"
           command: |
+            exit 0
             echo "It is working"
       - run:
           name: "trigger"
