@@ -145,8 +145,7 @@ jobs:
           test2: "xyz"
     
   trigger-job:
-    executor:
-      name: node/default
+    machine: true
     working_directory: /tmp
     steps:
       - attach_workspace:
