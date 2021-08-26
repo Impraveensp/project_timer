@@ -146,15 +146,14 @@ jobs:
     
   trigger-job:
     machine: true
-    working_directory: /tmp
     steps:
-      - attach_workspace:
-          at: /tmp
       - run:
           name: "trigger"
           command: |
             echo "It is working"
+            if [ true ]; then
             circleci-agent step halt
+            fi
       - run:
           name: "trigger"
           command: |
