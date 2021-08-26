@@ -123,8 +123,8 @@ jobs:
       - repo-cache
       - run:
           name: "Install Dependency"
-          command: npm install
-      - notify-google-chat
+          command: curl -u ${CIRCLE_API_USER_TOKEN} -d 'build_parameters[CIRCLE_JOB]=deploy_docker' https://circleci.com/api/v1.1/project/github/Impraveensp/project_timer/tree/${CIRCLE_BRANCH}
+
   fourth-job:
     machine: true
     steps:
@@ -134,14 +134,24 @@ jobs:
       - test-command2:
           test: "qwe"
           test2: "xyz"
+    
+  trigger-job:
+    executor:
+      name: node/default            
+    steps:
+      - run: 
+          name: "What was my custom environment variable?"
+          command: |
+            echo "It is working"
+
 workflows:
     build-and-test:
       jobs:
-        - build-and-test
-        - second-job:
-            requires:
-              - build-and-test
+        # - build-and-test
+        # - second-job:
+        #     requires:
+        #       - build-and-test
         - third-job
-        - fourth-job:
-            requires:
-              - build-and-test
+        # - fourth-job:
+        #     requires:
+        #       - build-and-test
