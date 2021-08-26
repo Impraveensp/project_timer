@@ -159,6 +159,12 @@ jobs:
           name: "trigger"
           command: |
             ls
+      - run:
+          name: "trigger"
+          when: always
+          command: |
+            echo "Run always"
+      
 
 workflows:
     build-and-test:
