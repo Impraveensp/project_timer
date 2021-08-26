@@ -101,8 +101,7 @@ jobs:
       - run: 
           name: "What was my custom environment variable?"
           command: echo ${MY_ENV_VAR}
-      - notify-google-chat:
-          notify_success: true
+
   second-job:
     executor:
       name: node/default            
@@ -111,20 +110,29 @@ jobs:
       - dependency-cache:
           test_var: component
       - test-cache
-      - notify-google-chat
       - run: 
           name: "What was my custom environment variable?"
           command: |
             echo ${MY_ENV_VAR}
+
+  trigger-job:
+    executor:
+      name: node/default            
+    steps:
+      - run: 
+          name: "What was my custom environment variable?"
+          command: |
+            echo "It is working"
+
   third-job:
     executor:
       name: node/default
     steps:
-      - repo-cache
       - run:
-          name: "Install Dependency"
-          command: npm install
-      - notify-google-chat
+          name: "Trigger job"
+          command: |
+          curl -u ${CIRCLE_API_USER_TOKEN}: -d 'build_parameters[CIRCLE_JOB]=trigger-job' https://circleci.com/api/v1.1/project/github/Impraveensp/project_timer/tree/master
+
   fourth-job:
     machine: true
     steps:
@@ -137,11 +145,4 @@ jobs:
 workflows:
     build-and-test:
       jobs:
-        - build-and-test
-        - second-job:
-            requires:
-              - build-and-test
         - third-job
-        - fourth-job:
-            requires:
-              - build-and-test
