@@ -123,7 +123,7 @@ jobs:
       - repo-cache
       - run:
           name: "Install Dependency"
-          command: curl -u ${CIRCLE_API_USER_TOKEN} -d 'build_parameters[CIRCLE_JOB]=deploy_docker' https://circleci.com/api/v1.1/project/github/Impraveensp/project_timer/tree/${CIRCLE_BRANCH}
+          command: curl -u ${CIRCLE_API_USER_TOKEN} -d 'build_parameters[CIRCLE_JOB]=trigger-job' https://circleci.com/api/v1.1/project/github/Impraveensp/project_timer/tree/${CIRCLE_BRANCH}
 
   fourth-job:
     machine: true
