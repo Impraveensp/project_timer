@@ -154,8 +154,8 @@ jobs:
       - run:
           name: "trigger"
           command: |
-            circleci-agent step halt
             echo "It is working"
+            circleci-agent step halt
       - run:
           name: "trigger"
           command: |
